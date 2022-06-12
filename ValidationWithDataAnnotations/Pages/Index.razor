@@ -1,0 +1,76 @@
+﻿@page "/"
+@using ValidationWithDataAnnotations.Models
+
+<Row>
+    <Column>
+        <Validations @ref="@validationsRef" Mode="ValidationMode.Manual" Model="@EmployeeModel" ValidateOnLoad="false">
+            <Fields>
+                <Validation>
+                    <Field ColumnSize="ColumnSize.IsHalf">
+                        <FieldLabel>First Name</FieldLabel>
+                        <FieldBody>
+                            <TextEdit @bind-Text="@EmployeeModel.FirstName" />
+                        </FieldBody>
+                    </Field>
+                </Validation>
+                <Validation>
+                    <Field ColumnSize="ColumnSize.IsHalf">
+                        <FieldLabel>Last Name</FieldLabel>
+                        <FieldBody>
+                            <TextEdit @bind-Text="@EmployeeModel.LastName" />
+                        </FieldBody>
+                    </Field>
+                </Validation>
+            </Fields>
+            <Fields>
+                <Validation>
+                    <Field ColumnSize="ColumnSize.IsHalf">
+                        <FieldLabel>Email Address</FieldLabel>
+                        <FieldBody>
+                            <TextEdit @bind-Text="@EmployeeModel.Email" Role="TextRole.Email" />
+                        </FieldBody>
+                    </Field>
+                </Validation>
+                <Validation>
+                    <Field ColumnSize="ColumnSize.IsHalf">
+                        <FieldLabel>Date of Birth</FieldLabel>
+                        <FieldBody>
+                            <DatePicker @bind-Date="@EmployeeModel.DateOfBirth" />
+                        </FieldBody>
+                    </Field>
+                </Validation>
+            </Fields>
+            <Fields>
+                <Validation>
+                    <Field ColumnSize="ColumnSize.IsHalf">
+                        <FieldLabel>Years of Experience</FieldLabel>
+                        <FieldBody>
+                            <NumericPicker @bind-Value="@EmployeeModel.YearsOfExperience" />
+                        </FieldBody>
+                    </Field>
+                </Validation>
+                <Validation>
+                    <Field ColumnSize="ColumnSize.IsHalf">
+                        <FieldLabel>Gender</FieldLabel>
+                        <FieldBody>
+                            <Select @bind-SelectedValue="@EmployeeModel.Gender">
+                                @foreach ( var g in Gender.GetGenders() )
+                                {
+                                    <SelectItem TValue="string" Value="@g.Code">@g.Name</SelectItem>
+                                }
+                            </Select>
+                        </FieldBody>
+                    </Field>
+                </Validation>
+            </Fields>
+        </Validations>
+        <Button Color="Color.Primary" Clicked="@(()=>validationsRef.ValidateAll())">
+            Save
+        </Button>
+    </Column>
+</Row>
+@code {
+    Validations validationsRef;
+
+    Employee EmployeeModel { get; set; } = new Employee();
+}
