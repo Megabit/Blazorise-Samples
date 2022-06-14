@@ -3,13 +3,17 @@
 
 <Row>
     <Column>
-        <Validations @ref="@validationsRef" Mode="ValidationMode.Manual" Model="@EmployeeModel" ValidateOnLoad="false">
+        <Validations @ref="@ValidationsRef" Mode="ValidationMode.Manual" Model="@EmployeeModel" ValidateOnLoad="false">
             <Fields>
                 <Validation>
                     <Field ColumnSize="ColumnSize.IsHalf">
                         <FieldLabel>First Name</FieldLabel>
                         <FieldBody>
-                            <TextEdit @bind-Text="@EmployeeModel.FirstName" />
+                            <TextEdit @bind-Text="@EmployeeModel.FirstName">
+                                <Feedback>
+                                    <ValidationError />
+                                </Feedback>
+                            </TextEdit>
                         </FieldBody>
                     </Field>
                 </Validation>
@@ -17,7 +21,11 @@
                     <Field ColumnSize="ColumnSize.IsHalf">
                         <FieldLabel>Last Name</FieldLabel>
                         <FieldBody>
-                            <TextEdit @bind-Text="@EmployeeModel.LastName" />
+                            <TextEdit @bind-Text="@EmployeeModel.LastName">
+                                <Feedback>
+                                    <ValidationError />
+                                </Feedback>
+                            </TextEdit>
                         </FieldBody>
                     </Field>
                 </Validation>
@@ -27,7 +35,11 @@
                     <Field ColumnSize="ColumnSize.IsHalf">
                         <FieldLabel>Email Address</FieldLabel>
                         <FieldBody>
-                            <TextEdit @bind-Text="@EmployeeModel.Email" Role="TextRole.Email" />
+                            <TextEdit @bind-Text="@EmployeeModel.Email" Role="TextRole.Email">
+                                <Feedback>
+                                    <ValidationError />
+                                </Feedback>
+                            </TextEdit>
                         </FieldBody>
                     </Field>
                 </Validation>
@@ -35,7 +47,11 @@
                     <Field ColumnSize="ColumnSize.IsHalf">
                         <FieldLabel>Date of Birth</FieldLabel>
                         <FieldBody>
-                            <DatePicker @bind-Date="@EmployeeModel.DateOfBirth" />
+                            <DatePicker @bind-Date="@EmployeeModel.DateOfBirth">
+                                <Feedback>
+                                    <ValidationError />
+                                </Feedback>
+                            </DatePicker>
                         </FieldBody>
                     </Field>
                 </Validation>
@@ -45,7 +61,11 @@
                     <Field ColumnSize="ColumnSize.IsHalf">
                         <FieldLabel>Years of Experience</FieldLabel>
                         <FieldBody>
-                            <NumericPicker @bind-Value="@EmployeeModel.YearsOfExperience" />
+                            <NumericPicker @bind-Value="@EmployeeModel.YearsOfExperience">
+                                <Feedback>
+                                    <ValidationError />
+                                </Feedback>
+                            </NumericPicker>
                         </FieldBody>
                     </Field>
                 </Validation>
@@ -54,23 +74,91 @@
                         <FieldLabel>Gender</FieldLabel>
                         <FieldBody>
                             <Select @bind-SelectedValue="@EmployeeModel.Gender">
-                                @foreach ( var g in Gender.GetGenders() )
-                                {
-                                    <SelectItem TValue="string" Value="@g.Code">@g.Name</SelectItem>
-                                }
+                                <ChildContent>
+                                    <SelectItem TValue="string"></SelectItem>
+                                    @foreach ( var g in Gender.GetGenders() )
+                                    {
+                                        <SelectItem TValue="string" Value="@g.Code">@g.Name</SelectItem>
+                                    }
+                                </ChildContent>
+                                <Feedback>
+                                    <ValidationError />
+                                </Feedback>
                             </Select>
                         </FieldBody>
                     </Field>
                 </Validation>
             </Fields>
+            <Validation>
+                <Field>
+                    <FieldLabel>Address</FieldLabel>
+                    <FieldBody>
+                        <TextEdit @bind-Text="@EmployeeModel.Address.Street">
+                            <Feedback>
+                                <ValidationError />
+                            </Feedback>
+                        </TextEdit>
+                    </FieldBody>
+                </Field>
+            </Validation>
+            <Fields>
+                <Validation>
+                    <Field ColumnSize="ColumnSize.IsHalf">
+                        <FieldLabel>City</FieldLabel>
+                        <FieldBody>
+                            <TextEdit @bind-Text="@EmployeeModel.Address.City">
+                                <Feedback>
+                                    <ValidationError />
+                                </Feedback>
+                            </TextEdit>
+                        </FieldBody>
+                    </Field>
+                </Validation>
+                <Validation>
+                    <Field ColumnSize="ColumnSize.IsHalf">
+                        <FieldLabel>Zip</FieldLabel>
+                        <FieldBody>
+                            <TextEdit @bind-Text="@EmployeeModel.Address.Zip">
+                                <Feedback>
+                                    <ValidationError />
+                                </Feedback>
+                            </TextEdit>
+                        </FieldBody>
+                    </Field>
+                </Validation>
+            </Fields>
+            <Validation>
+                <Field>
+                    <FieldLabel>Country</FieldLabel>
+                    <FieldBody>
+                        <TextEdit @bind-Text="@EmployeeModel.Address.Country">
+                            <Feedback>
+                                <ValidationError />
+                            </Feedback>
+                        </TextEdit>
+                    </FieldBody>
+                </Field>
+            </Validation>
         </Validations>
-        <Button Color="Color.Primary" Clicked="@(()=>validationsRef.ValidateAll())">
-            Save
+        <Button Color="Color.Primary" Clicked="@OnSaveClicked">
+            Validate and Submit
         </Button>
     </Column>
 </Row>
 @code {
-    Validations validationsRef;
+    [Inject] IMessageService MessageService { get; set; }
+
+    Validations ValidationsRef { get; set; }
 
     Employee EmployeeModel { get; set; } = new Employee();
+
+    async Task OnSaveClicked()
+    {
+        if ( await ValidationsRef.ValidateAll() )
+        {
+            await MessageService.Info( "Thank you for filling the form." );
+
+            await ValidationsRef.ClearAll();
+        }
+    }
 }
