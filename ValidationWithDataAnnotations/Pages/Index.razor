@@ -106,11 +106,18 @@
                     <Field ColumnSize="ColumnSize.IsHalf">
                         <FieldLabel>City</FieldLabel>
                         <FieldBody>
-                            <TextEdit @bind-Text="@EmployeeModel.Address.City">
+                            <Select @bind-SelectedValue="@EmployeeModel.Address.City">
+                                <ChildContent>
+                                    <SelectItem TValue="string"></SelectItem>
+                                    @foreach ( var c in City.GetCities() )
+                                    {
+                                        <SelectItem TValue="string" Value="@c.Code">@c.Name</SelectItem>
+                                    }
+                                </ChildContent>
                                 <Feedback>
                                     <ValidationError />
                                 </Feedback>
-                            </TextEdit>
+                            </Select>
                         </FieldBody>
                     </Field>
                 </Validation>
@@ -131,11 +138,18 @@
                 <Field>
                     <FieldLabel>Country</FieldLabel>
                     <FieldBody>
-                        <TextEdit @bind-Text="@EmployeeModel.Address.Country">
+                        <Select @bind-SelectedValue="@EmployeeModel.Address.Country">
+                            <ChildContent>
+                                <SelectItem TValue="string"></SelectItem>
+                                @foreach ( var c in Country.GetCountries() )
+                                {
+                                    <SelectItem TValue="string" Value="@c.Code">@c.Name</SelectItem>
+                                }
+                            </ChildContent>
                             <Feedback>
                                 <ValidationError />
                             </Feedback>
-                        </TextEdit>
+                        </Select>
                     </FieldBody>
                 </Field>
             </Validation>
