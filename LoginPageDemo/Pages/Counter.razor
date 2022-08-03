@@ -1,19 +1,20 @@
 ﻿@page "/counter"
 
-<PageTitle>Counter</PageTitle>
+<Heading Size="HeadingSize.Is1">Counter with Blazorise</Heading>
 
-<h1>Counter</h1>
+<Paragraph>Current count: @currentCount</Paragraph>
 
-<p role="status">Current count: @currentCount</p>
-
-<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+<Button Color="Color.Primary" Clicked="IncrementCount">Click me</Button>
 
 @code {
-    private int currentCount = 0;
+    int currentCount = 0;
 
-    private void IncrementCount()
+    void IncrementCount()
     {
         currentCount++;
     }
-
 }
+
+
+
+
