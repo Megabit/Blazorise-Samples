@@ -1,7 +1,7 @@
 @page "/Login"
 <h3>Login</h3>
 
-<Tabs SelectedTab="@SelectedTab" SelectedTabChanged="@OnSelectedTabChanged">
+<Tabs @bind-SelectedTab="@SelectedTab" SelectedTabChanged="@OnSelectedTabChanged">
 	<Items>
 		<Tab Name="login">Login</Tab>
 		<Tab Name="register">Register</Tab>
@@ -43,4 +43,5 @@
 
 @code {
 	bool rememberMe;
+	string SelectedTab="login"
 }
