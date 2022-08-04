@@ -29,11 +29,19 @@
             </Field>
             <Field>
                 <FieldLabel>Email</FieldLabel>
-                <TextEdit Placeholder="Enter Your Email" />
+				<Validation Validator="ValidateEmail">
+                	<TextEdit Placeholder="Enter Your Email">
+						<Feedback>
+							<ValidationNone>Please Enter your email.</ValidationNone>
+							<ValidationSuccess>Email is valid</ValidationSuccess>
+							<VlaidationError>Enter Valid email </VlaidationError>
+						</Feedback>
+					</TextEdit>
+				</Validation>
             </Field>
             <Field>
                 <FieldLabel>Password</FieldLabel>
-                <TextEdit Placeholder="Enter Email" />
+                <TextEdit Placeholder="Enter Email" />		
                 <FieldHelp>Password Strength: <Text TextColor="TextColor.Danger">Strong</Text></FieldHelp>
             </Field>
             <Button Color="Color.Primary">
@@ -46,4 +54,10 @@
 @code {
     bool rememberMe;
     string SelectedTab = "login";
+	void ValidateEmail (ValidatorEventArgs e)
+	{
+		var email = Convert.ToString(e.Value);
+		e.Status = string.IsNullOrEmpty(email) ? ValidationStatus.None:
+			email.Contains("@") ? ValidationStatus.Success : ValidationStatus.Error;
+	}
 }
