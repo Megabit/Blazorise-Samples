@@ -11,7 +11,15 @@
             Welcome Back, Please Login
             <Field>
                 <FieldLabel>Username</FieldLabel>
-                <TextEdit Placeholder="Enter Username..." />
+				<Validation Validator="ValidatorRule.IsNotEmpty">
+                	<TextEdit Placeholder="Enter Username...">
+						<Feedback>
+							<ValidationNone>Please Enter A Username. </ValidationNone>
+							<ValidationSuccess>Username is good</ValidationSuccess>
+							<ValidationError>Please Enter A Valid Username</ValidationError>
+						</Feedback>
+					</TextEdit>
+				</Validation>
             </Field>
             <Field>
                 <FieldLabel>Password</FieldLabel>
@@ -54,6 +62,7 @@
 @code {
     bool rememberMe;
     string SelectedTab = "login";
+	string Username;
 	void ValidateEmail (ValidatorEventArgs e)
 	{
 		var email = Convert.ToString(e.Value);
