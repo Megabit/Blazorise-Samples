@@ -1,85 +1,91 @@
 @page "/Login"
 <h3>Login</h3>
 
-<Tabs @bind-SelectedTab="@SelectedTab">
-    <Items>
-        <Tab Name="login">Login</Tab>
-        <Tab Name="register">Register</Tab>
-    </Items>
-    <Content>
-        <TabPanel Name="login">
-            <Card>
-                <CardBody>
-                    <CardTitle>
-                        Welcome Back, Please Login
-                    </CardTitle>
-                </CardBody>
-                <CardBody>
-                    <Field>
-                        <FieldLabel>Username</FieldLabel>
-                        <Validation Validator="ValidationRule.IsNotEmpty">
-                            <TextEdit Placeholder="Enter Username...">
-                                <Feedback>
-                                    <ValidationNone>Please Enter A Username. </ValidationNone>
-                                    <ValidationSuccess>Username is good</ValidationSuccess>
-                                    <ValidationError>Please Enter A Valid Username</ValidationError>
-                                </Feedback>
-                            </TextEdit>
-                        </Validation>
-                    </Field>
-                    <Field>
-                        <FieldLabel>Password</FieldLabel>
-                        <TextEdit Placeholder="Enter Password.." />
-                    </Field>
-                    <Field>
-                        <Check TValue="bool" @bind-Checked="@rememberMe">Remember Me</Check>
-                    </Field>
-                </CardBody>
-                <CardFooter>
-                    <Button Color="Color.Primary">Login</Button>
-                    <Button Color="Color.Secondary">Forgot Password</Button>
-                </CardFooter>
-            </Card>
-        </TabPanel>
-        <TabPanel Name="register">
-            <Card>
-                <CardBody>
-                    <CardTitle>
-                        New Here? Create An Account
-                    </CardTitle>
-                </CardBody>
-                <CardBody>
-                    <Field>
-                        <FieldLabel>Name</FieldLabel>
-                        <TextEdit Placeholder="Enter Your Name" />
-                    </Field>
-                    <Field>
-                        <FieldLabel>Email</FieldLabel>
-                        <Validation Validator="ValidateEmail">
-                            <TextEdit Placeholder="Enter Your Email">
-                                <Feedback>
-                                    <ValidationNone>Please Enter your email.</ValidationNone>
-                                    <ValidationSuccess>Email is valid</ValidationSuccess>
-                                    <ValidationError>Enter Valid email </ValidationError>
-                                </Feedback>
-                            </TextEdit>
-                        </Validation>
-                    </Field>
-                    <Field>
-                        <FieldLabel>Password</FieldLabel>
-                        <TextEdit Placeholder="Enter Email" />
-                        <FieldHelp>Password Strength: <Text TextColor="TextColor.Danger">Strong</Text></FieldHelp>
-                    </Field>                    
-                </CardBody>
-                <CardFooter>
-                    <Button Color="Color.Primary">
-                        Create Account
-                    </Button>
-                </CardFooter>
-            </Card>
-        </TabPanel>
-    </Content>
-</Tabs>
+<Container>
+    <Row>
+        <Column>
+            <Tabs @bind-SelectedTab="@SelectedTab" Pills>
+                <Items>
+                    <Tab Name="login">Login</Tab>
+                    <Tab Name="register">Register</Tab>
+                </Items>
+                <Content>
+                    <TabPanel Name="login">
+                        <Card>
+                            <CardBody>
+                                <CardTitle>
+                                    Welcome Back, Please Login
+                                </CardTitle>
+                            </CardBody>
+                            <CardBody>
+                                <Field>
+                                    <FieldLabel>Username</FieldLabel>
+                                    <Validation Validator="ValidationRule.IsNotEmpty">
+                                        <TextEdit Placeholder="Enter Username...">
+                                            <Feedback>
+                                                <ValidationNone>Please Enter A Username. </ValidationNone>
+                                                <ValidationSuccess>Username is good</ValidationSuccess>
+                                                <ValidationError>Please Enter A Valid Username</ValidationError>
+                                            </Feedback>
+                                        </TextEdit>
+                                    </Validation>
+                                </Field>
+                                <Field>
+                                    <FieldLabel>Password</FieldLabel>
+                                    <TextEdit Placeholder="Enter Password.." />
+                                </Field>
+                                <Field>
+                                    <Check TValue="bool" @bind-Checked="@rememberMe">Remember Me</Check>
+                                </Field>
+                            </CardBody>
+                            <CardFooter>
+                                <Button Color="Color.Primary">Login</Button>
+                                <Button Color="Color.Secondary">Forgot Password</Button>
+                            </CardFooter>
+                        </Card>
+                    </TabPanel>
+                    <TabPanel Name="register">
+                        <Card>
+                            <CardBody>
+                                <CardTitle>
+                                    New Here? Create An Account
+                                </CardTitle>
+                            </CardBody>
+                            <CardBody>
+                                <Field>
+                                    <FieldLabel>Name</FieldLabel>
+                                    <TextEdit Placeholder="Enter Your Name" />
+                                </Field>
+                                <Field>
+                                    <FieldLabel>Email</FieldLabel>
+                                    <Validation Validator="ValidateEmail">
+                                        <TextEdit Placeholder="Enter Your Email">
+                                            <Feedback>
+                                                <ValidationNone>Please Enter your email.</ValidationNone>
+                                                <ValidationSuccess>Email is valid</ValidationSuccess>
+                                                <ValidationError>Enter Valid email </ValidationError>
+                                            </Feedback>
+                                        </TextEdit>
+                                    </Validation>
+                                </Field>
+                                <Field>
+                                    <FieldLabel>Password</FieldLabel>
+                                    <TextEdit Placeholder="Enter Email" />
+                                    <FieldHelp>Password Strength: <Text TextColor="TextColor.Danger">Strong</Text></FieldHelp>
+                                </Field>
+                            </CardBody>
+                            <CardFooter>
+                                <Button Color="Color.Primary">
+                                    Create Account
+                                </Button>
+                            </CardFooter>
+                        </Card>
+                    </TabPanel>
+                </Content>
+            </Tabs>
+        </Column>
+    </Row>
+</Container>
 
 @code {
     bool rememberMe;
