@@ -4,7 +4,7 @@
 <Container>
     <Row>
         <Column>
-            <Tabs @bind-SelectedTab="@SelectedTab" Pills>
+            <Tabs @bind-SelectedTab="@SelectedTab" Pills FullWidth>
                 <Items>
                     <Tab Name="login">Login</Tab>
                     <Tab Name="register">Register</Tab>
@@ -18,30 +18,33 @@
                                 </CardTitle>
                             </CardBody>
                             <CardBody>
-                                <Field>
-                                    <FieldLabel>Username</FieldLabel>
+                                <Validations @ref="@loginValidationsRef" Mode="ValidationMode.Manual" ValidateOnLoad="false">
                                     <Validation Validator="ValidationRule.IsNotEmpty">
-                                        <TextEdit Placeholder="Enter Username...">
-                                            <Feedback>
-                                                <ValidationNone>Please Enter A Username. </ValidationNone>
-                                                <ValidationSuccess>Username is good</ValidationSuccess>
-                                                <ValidationError>Please Enter A Valid Username</ValidationError>
-                                            </Feedback>
-                                        </TextEdit>
+                                        <Field>
+                                            <FieldLabel>Username</FieldLabel>
+
+                                            <TextEdit Placeholder="Enter Username...">
+                                                <Feedback>
+                                                    <ValidationNone>Please Enter A Username. </ValidationNone>
+                                                    <ValidationSuccess>Username is good</ValidationSuccess>
+                                                    <ValidationError>Please Enter A Valid Username</ValidationError>
+                                                </Feedback>
+                                            </TextEdit>
+                                        </Field>
                                     </Validation>
-                                </Field>
-                                <Field>
-                                    <FieldLabel>Password</FieldLabel>
-                                    <TextEdit Placeholder="Enter Password.." />
-                                </Field>
-                                <Field>
-                                    <Check TValue="bool" @bind-Checked="@rememberMe">Remember Me</Check>
-                                </Field>
+                                    <Field>
+                                        <FieldLabel>Password</FieldLabel>
+                                        <TextEdit Placeholder="Enter Password.." />
+                                    </Field>
+                                    <Field>
+                                        <Check TValue="bool" @bind-Checked="@rememberMe">Remember Me</Check>
+                                    </Field>
+                                </Validations>
                             </CardBody>
-                            <CardFooter>
-                                <Button Color="Color.Primary">Login</Button>
+                            <CardBody>
+                                <Button Color="Color.Primary" Clicked="@OnLoginClicked">Login</Button>
                                 <Button Color="Color.Secondary">Forgot Password</Button>
-                            </CardFooter>
+                            </CardBody>
                         </Card>
                     </TabPanel>
                     <TabPanel Name="register">
@@ -52,33 +55,36 @@
                                 </CardTitle>
                             </CardBody>
                             <CardBody>
-                                <Field>
-                                    <FieldLabel>Name</FieldLabel>
-                                    <TextEdit Placeholder="Enter Your Name" />
-                                </Field>
-                                <Field>
-                                    <FieldLabel>Email</FieldLabel>
+                                <Validations @ref="@registerValidationsRef" Mode="ValidationMode.Manual" ValidateOnLoad="false">
+                                    <Field>
+                                        <FieldLabel>Name</FieldLabel>
+                                        <TextEdit Placeholder="Enter Your Name" />
+                                    </Field>
                                     <Validation Validator="ValidateEmail">
-                                        <TextEdit Placeholder="Enter Your Email">
-                                            <Feedback>
-                                                <ValidationNone>Please Enter your email.</ValidationNone>
-                                                <ValidationSuccess>Email is valid</ValidationSuccess>
-                                                <ValidationError>Enter Valid email </ValidationError>
-                                            </Feedback>
-                                        </TextEdit>
+                                        <Field>
+                                            <FieldLabel>Email</FieldLabel>
+
+                                            <TextEdit Placeholder="Enter Your Email">
+                                                <Feedback>
+                                                    <ValidationNone>Please Enter your email.</ValidationNone>
+                                                    <ValidationSuccess>Email is valid</ValidationSuccess>
+                                                    <ValidationError>Enter Valid email </ValidationError>
+                                                </Feedback>
+                                            </TextEdit>
+                                        </Field>
                                     </Validation>
-                                </Field>
-                                <Field>
-                                    <FieldLabel>Password</FieldLabel>
-                                    <TextEdit Placeholder="Enter Email" />
-                                    <FieldHelp>Password Strength: <Text TextColor="TextColor.Danger">Strong</Text></FieldHelp>
-                                </Field>
+                                    <Field>
+                                        <FieldLabel>Password</FieldLabel>
+                                        <TextEdit Placeholder="Enter Email" />
+                                        <FieldHelp>Password Strength: <Text TextColor="TextColor.Danger">Strong</Text></FieldHelp>
+                                    </Field>
+                                </Validations>
                             </CardBody>
-                            <CardFooter>
-                                <Button Color="Color.Primary">
+                            <CardBody>
+                                <Button Color="Color.Primary" Clicked="@OnRegisterClicked">
                                     Create Account
                                 </Button>
-                            </CardFooter>
+                            </CardBody>
                         </Card>
                     </TabPanel>
                 </Content>
@@ -88,6 +94,9 @@
 </Container>
 
 @code {
+    Validations loginValidationsRef;
+    Validations registerValidationsRef;
+
     bool rememberMe;
     string SelectedTab = "login";
     string Username;
@@ -97,5 +106,25 @@
         var email = Convert.ToString( e.Value );
         e.Status = string.IsNullOrEmpty( email ) ? ValidationStatus.None :
             email.Contains( "@" ) ? ValidationStatus.Success : ValidationStatus.Error;
+    }
+
+    async Task OnLoginClicked()
+    {
+        if ( await loginValidationsRef.ValidateAll() )
+        {
+            // do the real login here
+
+            await loginValidationsRef.ClearAll();
+        }
+    }
+
+    async Task OnRegisterClicked()
+    {
+        if ( await registerValidationsRef.ValidateAll() )
+        {
+            // do the real login here
+
+            await registerValidationsRef.ClearAll();
+        }
     }
 }
