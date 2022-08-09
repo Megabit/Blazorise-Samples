@@ -21,13 +21,13 @@
                                 <Validations @ref="@loginValidationsRef" Mode="ValidationMode.Manual" ValidateOnLoad="false">
                                     <Validation Validator="ValidationRule.IsNotEmpty">
                                         <Field>
-                                            <FieldLabel>Username</FieldLabel>
+                                            <FieldLabel>Email</FieldLabel>
 
-                                            <TextEdit Placeholder="Enter Username...">
+                                            <TextEdit Placeholder="Enter email...">
                                                 <Feedback>
-                                                    <ValidationNone>Please Enter A Username. </ValidationNone>
+                                                    <ValidationNone>Please Enter Your Email. </ValidationNone>
                                                     <ValidationSuccess>Username is good</ValidationSuccess>
-                                                    <ValidationError>Please Enter A Valid Username</ValidationError>
+                                                    <ValidationError>Please Enter A Valid Email</ValidationError>
                                                 </Feedback>
                                             </TextEdit>
                                         </Field>
@@ -99,7 +99,7 @@
 
     bool rememberMe;
     string SelectedTab = "login";
-    string Username;
+    string Email;
 
     void ValidateEmail( ValidatorEventArgs e )
     {
