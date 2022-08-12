@@ -4,7 +4,7 @@
 <Container>
     <Row>
         <Column>
-            <Tabs @bind-SelectedTab="@SelectedTab" Pills FullWidth>
+            <Tabs @bind-SelectedTab="@selectedTab" Pills FullWidth>
                 <Items>
                     <Tab Name="login">Login</Tab>
                     <Tab Name="register">Register</Tab>
@@ -19,11 +19,10 @@
                             </CardBody>
                             <CardBody>
                                 <Validations @ref="@loginValidationsRef" Mode="ValidationMode.Manual" ValidateOnLoad="false">
-                                    <Validation Validator="ValidationRule.IsNotEmpty">
+                                    <Validation Validator="ValidationRule.IsEmail">
                                         <Field>
                                             <FieldLabel>Email</FieldLabel>
-
-                                            <TextEdit Placeholder="Enter email...">
+                                            <TextEdit @bind-Text="@email" Placeholder="Enter email...">
                                                 <Feedback>
                                                     <ValidationNone>Please Enter Your Email. </ValidationNone>
                                                     <ValidationSuccess>Email is good</ValidationSuccess>
@@ -32,10 +31,12 @@
                                             </TextEdit>
                                         </Field>
                                     </Validation>
-                                    <Field>
-                                        <FieldLabel>Password</FieldLabel>
-                                        <TextEdit Placeholder="Enter Password.." />
-                                    </Field>
+                                    <Validation Validator="ValidationRule.IsNotEmpty">
+                                        <Field>
+                                            <FieldLabel>Password</FieldLabel>
+                                            <TextEdit @bind-Text="@password" Placeholder="Enter Password.." />
+                                        </Field>
+                                    </Validation>
                                     <Field>
                                         <Check TValue="bool" @bind-Checked="@rememberMe">Remember Me</Check>
                                     </Field>
@@ -56,15 +57,16 @@
                             </CardBody>
                             <CardBody>
                                 <Validations @ref="@registerValidationsRef" Mode="ValidationMode.Manual" ValidateOnLoad="false">
-                                    <Field>
-                                        <FieldLabel>Name</FieldLabel>
-                                        <TextEdit Placeholder="Enter Your Name" />
-                                    </Field>
-                                    <Validation Validator="ValidateEmail">
+                                    <Validation Validator="ValidationRule.IsNotEmpty">
+                                        <Field>
+                                            <FieldLabel>Name</FieldLabel>
+                                            <TextEdit @bind-Text="@name" Placeholder="Enter Your Name" />
+                                        </Field>
+                                    </Validation>
+                                    <Validation Validator="ValidationRule.IsEmail">
                                         <Field>
                                             <FieldLabel>Email</FieldLabel>
-
-                                            <TextEdit Placeholder="Enter Your Email">
+                                            <TextEdit @bind-Text="@email" Placeholder="Enter Your Email">
                                                 <Feedback>
                                                     <ValidationNone>Please Enter your email.</ValidationNone>
                                                     <ValidationSuccess>Email is valid</ValidationSuccess>
@@ -73,11 +75,13 @@
                                             </TextEdit>
                                         </Field>
                                     </Validation>
-                                    <Field>
-                                        <FieldLabel>Password</FieldLabel>
-                                        <TextEdit Placeholder="Enter Password" />
-                                        <FieldHelp>Password Strength: <Text TextColor="TextColor.Danger">Strong</Text></FieldHelp>
-                                    </Field>
+                                    <Validation Validator="ValidationRule.IsNotEmpty">
+                                        <Field>
+                                            <FieldLabel>Password</FieldLabel>
+                                            <TextEdit @bind-Text="@password" Placeholder="Enter Password" />
+                                            <FieldHelp>Password Strength: <Text TextColor="TextColor.Danger">Strong</Text></FieldHelp>
+                                        </Field>
+                                    </Validation>
                                 </Validations>
                             </CardBody>
                             <CardBody>
@@ -97,16 +101,12 @@
     Validations loginValidationsRef;
     Validations registerValidationsRef;
 
-    bool rememberMe;
-    string SelectedTab = "login";
-    string Email;
+    string selectedTab = "login";
 
-    void ValidateEmail( ValidatorEventArgs e )
-    {
-        var email = Convert.ToString( e.Value );
-        e.Status = string.IsNullOrEmpty( email ) ? ValidationStatus.None :
-            email.Contains( "@" ) ? ValidationStatus.Success : ValidationStatus.Error;
-    }
+    string name;
+    string email;
+    string password;
+    bool rememberMe;
 
     async Task OnLoginClicked()
     {
