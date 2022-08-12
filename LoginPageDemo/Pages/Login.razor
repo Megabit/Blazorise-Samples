@@ -4,7 +4,7 @@
 <Container>
     <Row>
         <Column>
-            <Tabs @bind-SelectedTab="@selectedTab" Pills FullWidth>
+            <Tabs SelectedTab="@selectedTab" SelectedTabChanged="@OnSelectedTabChanged" Pills FullWidth>
                 <Items>
                     <Tab Name="login">Login</Tab>
                     <Tab Name="register">Register</Tab>
@@ -107,6 +107,13 @@
     string email;
     string password;
     bool rememberMe;
+
+    private Task OnSelectedTabChanged( string name )
+    {
+        selectedTab = name;
+
+        return Task.CompletedTask;
+    }
 
     async Task OnLoginClicked()
     {
