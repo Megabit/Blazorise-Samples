@@ -43,6 +43,27 @@
           "buildMultiTargeting/Blazorise.Bootstrap.props": {}
         }
       },
+      "Blazorise.Bootstrap5/1.0.6": {
+        "type": "package",
+        "dependencies": {
+          "Blazorise": "1.0.6",
+          "Microsoft.AspNetCore.Components": "6.0.0",
+          "Microsoft.AspNetCore.Components.Web": "6.0.0",
+          "Microsoft.Extensions.Logging.Abstractions": "6.0.1"
+        },
+        "compile": {
+          "lib/net6.0/Blazorise.Bootstrap5.dll": {}
+        },
+        "runtime": {
+          "lib/net6.0/Blazorise.Bootstrap5.dll": {}
+        },
+        "build": {
+          "buildTransitive/Blazorise.Bootstrap5.props": {}
+        },
+        "buildMultiTargeting": {
+          "buildMultiTargeting/Blazorise.Bootstrap5.props": {}
+        }
+      },
       "Blazorise.Icons.FontAwesome/1.0.6": {
         "type": "package",
         "dependencies": {
@@ -488,6 +509,27 @@
         },
         "buildMultiTargeting": {
           "buildMultiTargeting/Blazorise.Bootstrap.props": {}
+        }
+      },
+      "Blazorise.Bootstrap5/1.0.6": {
+        "type": "package",
+        "dependencies": {
+          "Blazorise": "1.0.6",
+          "Microsoft.AspNetCore.Components": "6.0.0",
+          "Microsoft.AspNetCore.Components.Web": "6.0.0",
+          "Microsoft.Extensions.Logging.Abstractions": "6.0.1"
+        },
+        "compile": {
+          "lib/net6.0/Blazorise.Bootstrap5.dll": {}
+        },
+        "runtime": {
+          "lib/net6.0/Blazorise.Bootstrap5.dll": {}
+        },
+        "build": {
+          "buildTransitive/Blazorise.Bootstrap5.props": {}
+        },
+        "buildMultiTargeting": {
+          "buildMultiTargeting/Blazorise.Bootstrap5.props": {}
         }
       },
       "Blazorise.Icons.FontAwesome/1.0.6": {
@@ -960,6 +1002,28 @@
         "lib/net6.0/Blazorise.Bootstrap.dll",
         "staticwebassets/blazorise.bootstrap.css",
         "staticwebassets/blazorise.bootstrap.min.css",
+        "staticwebassets/modal.js",
+        "staticwebassets/tooltip.js"
+      ]
+    },
+    "Blazorise.Bootstrap5/1.0.6": {
+      "sha512": "Y/8HRmGlhWEMoNSsA4CSl46UeOfegdbvUAOnv23oh+8ZbkfPOU+Z0Mttlv96Q6JlDGwYG9jhtg04TCuIdN441g==",
+      "type": "package",
+      "path": "blazorise.bootstrap5/1.0.6",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Blazorise.png",
+        "LICENSE.md",
+        "blazorise.bootstrap5.1.0.6.nupkg.sha512",
+        "blazorise.bootstrap5.nuspec",
+        "build/Blazorise.Bootstrap5.props",
+        "build/Microsoft.AspNetCore.StaticWebAssets.props",
+        "buildMultiTargeting/Blazorise.Bootstrap5.props",
+        "buildTransitive/Blazorise.Bootstrap5.props",
+        "lib/net6.0/Blazorise.Bootstrap5.dll",
+        "staticwebassets/blazorise.bootstrap5.css",
+        "staticwebassets/blazorise.bootstrap5.min.css",
         "staticwebassets/modal.js",
         "staticwebassets/tooltip.js"
       ]
@@ -1742,6 +1806,7 @@
     "net6.0": [
       "Blazorise >= 1.0.6",
       "Blazorise.Bootstrap >= 1.0.6",
+      "Blazorise.Bootstrap5 >= 1.0.6",
       "Blazorise.Icons.FontAwesome >= 1.0.6",
       "Microsoft.AspNetCore.Components.WebAssembly >= 6.0.8",
       "Microsoft.AspNetCore.Components.WebAssembly.DevServer >= 6.0.8"
@@ -1789,6 +1854,10 @@
             "version": "[1.0.6, )"
           },
           "Blazorise.Bootstrap": {
+            "target": "Package",
+            "version": "[1.0.6, )"
+          },
+          "Blazorise.Bootstrap5": {
             "target": "Package",
             "version": "[1.0.6, )"
           },

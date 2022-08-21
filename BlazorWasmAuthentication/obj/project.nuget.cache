@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "u9s0XaV34SfqjKzt+ih8436b9uDrJZ2xT4tJuUfooZ2ZCfl2b3uotXxemQgTaYykQF0qb7RT1jP3985nxIClUw==",
+  "dgSpecHash": "Biplksb4j6ZKPvnQKa27esED0TLhVLN2W6YS2WVluLO9o1rBTN0XJ5xDbmvajhHCNK7q5tHRUbHHYWFH+mSUOQ==",
   "success": true,
   "projectFilePath": "/Users/jamie/Documents/GitHub/Blazorise-Samples/BlazorWasmAuthentication/BlazorWasmAuthentication.csproj",
   "expectedPackageFiles": [
     "/Users/jamie/.nuget/packages/blazorise/1.0.6/blazorise.1.0.6.nupkg.sha512",
     "/Users/jamie/.nuget/packages/blazorise.bootstrap/1.0.6/blazorise.bootstrap.1.0.6.nupkg.sha512",
+    "/Users/jamie/.nuget/packages/blazorise.bootstrap5/1.0.6/blazorise.bootstrap5.1.0.6.nupkg.sha512",
     "/Users/jamie/.nuget/packages/blazorise.icons.fontawesome/1.0.6/blazorise.icons.fontawesome.1.0.6.nupkg.sha512",
     "/Users/jamie/.nuget/packages/microsoft.aspnetcore.authorization/6.0.8/microsoft.aspnetcore.authorization.6.0.8.nupkg.sha512",
     "/Users/jamie/.nuget/packages/microsoft.aspnetcore.components/6.0.8/microsoft.aspnetcore.components.6.0.8.nupkg.sha512",

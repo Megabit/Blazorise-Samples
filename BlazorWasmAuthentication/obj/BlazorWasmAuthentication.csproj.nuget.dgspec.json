@@ -46,6 +46,10 @@
               "target": "Package",
               "version": "[1.0.6, )"
             },
+            "Blazorise.Bootstrap5": {
+              "target": "Package",
+              "version": "[1.0.6, )"
+            },
             "Blazorise.Icons.FontAwesome": {
               "target": "Package",
               "version": "[1.0.6, )"
