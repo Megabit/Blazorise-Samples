@@ -12,11 +12,13 @@
     <PackageReference Include="Blazorise" Version="1.0.6" />
     <PackageReference Include="Blazorise.Bootstrap" Version="1.0.6" />
     <PackageReference Include="Blazorise.Icons.FontAwesome" Version="1.0.6" />
+    <PackageReference Include="Blazorise.Sidebar" Version="1.0.6" />
   </ItemGroup>
 
   <ItemGroup>
     <None Remove="Blazorise" />
     <None Remove="Blazorise.Bootstrap" />
     <None Remove="Blazorise.Icons.FontAwesome" />
+    <None Remove="Blazorise.Sidebar" />
   </ItemGroup>
 </Project>
