@@ -1,18 +1,67 @@
-﻿@inherits LayoutComponentBase
+﻿@layout RootLayout
+@inherits LayoutComponentBase
 
-<div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
-
-    <main>
-        <div class="top-row px-4">
-            <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
-        </div>
-
-        <article class="content px-4">
+@if (layoutType == "fixed-header")
+{
+    <Layout Sider>
+        <LayoutSider>
+            <LayoutSiderContent>
+                <SideMenu />
+            </LayoutSiderContent>
+        </LayoutSider>
+        <Layout>
+            <LayoutHeader Fixed>
+                <TopMenu ThemeEnabledChanged="@OnThemeEnabledChanged"
+                         ThemeGradientChanged="@OnThemeGradientChanged"
+                         ThemeRoundedChanged="@OnThemeRoundedChanged"
+                         ThemeColorChanged="@OnThemeColorChanged"
+                         @bind-LayoutType="@layoutType" />
+            </LayoutHeader>
+            <LayoutContent Padding="Padding.Is4.OnX">
+                @Body
+            </LayoutContent>
+        </Layout>
+    </Layout>
+}
+else if (layoutType == "fixed-header-footer-only")
+{
+    <Layout>
+        <LayoutHeader Fixed>
+            <TopMenu ThemeEnabledChanged="@OnThemeEnabledChanged"
+                     ThemeGradientChanged="@OnThemeGradientChanged"
+                     ThemeRoundedChanged="@OnThemeRoundedChanged"
+                     ThemeColorChanged="@OnThemeColorChanged"
+                     @bind-LayoutType="@layoutType" />
+        </LayoutHeader>
+        <LayoutContent>
             @Body
-        </article>
-    </main>
-</div>
-
+        </LayoutContent>
+        <LayoutFooter Fixed>
+            <FooterMenu></FooterMenu>
+        </LayoutFooter>
+    </Layout>
+}
+else if (layoutType == "sider-with-header-on-top")
+{
+    <Layout>
+        <LayoutHeader Fixed>
+            <TopMenu ThemeEnabledChanged="@OnThemeEnabledChanged"
+                     ThemeGradientChanged="@OnThemeGradientChanged"
+                     ThemeRoundedChanged="@OnThemeRoundedChanged"
+                     ThemeColorChanged="@OnThemeColorChanged"
+                     @bind-LayoutType="@layoutType" />
+        </LayoutHeader>
+        <Layout Sider>
+            <LayoutSider>
+                <LayoutSiderContent>
+                    <SideMenu />
+                </LayoutSiderContent>
+            </LayoutSider>
+            <Layout>
+                <LayoutContent Padding="Padding.Is4.OnX">
+                    @Body
+                </LayoutContent>
+            </Layout>
+        </Layout>
+    </Layout>
+}
