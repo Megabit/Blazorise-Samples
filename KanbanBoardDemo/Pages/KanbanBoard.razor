@@ -1,0 +1,10 @@
+﻿@page "/kanbanboard"
+<Heading Size="HeadingSize.Is1">Welcome To your Current Board</Heading>
+
+<Paragraph>Number of Tasks: @currentTasks</Paragraph>
+
+<DropContainer TItem="DropdownItem" Items="@items" ItemsFilter="@((item, dropZone) => item.Group == dropZone)" ItemDropped="@ItemDropped" Flex="Flex.Wrap.Grow.Is1">
+    <ChildContent>
+
+    </ChildContent>
+</DropContainer>
