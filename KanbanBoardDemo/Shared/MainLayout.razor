@@ -15,7 +15,7 @@
                          ThemeGradientChanged="@OnThemeGradientChanged"
                          ThemeRoundedChanged="@OnThemeRoundedChanged"
                          ThemeColorChanged="@OnThemeColorChanged"
-                         @bind-LayoutType="@layoutType" />
+                         @LayoutType="@layoutType" />
             </LayoutHeader>
             <LayoutContent Padding="Padding.Is4.OnX">
                 @Body
@@ -31,7 +31,7 @@ else if (layoutType == "fixed-header-footer-only")
                      ThemeGradientChanged="@OnThemeGradientChanged"
                      ThemeRoundedChanged="@OnThemeRoundedChanged"
                      ThemeColorChanged="@OnThemeColorChanged"
-                     @bind-LayoutType="@layoutType" />
+                     @LayoutType="@layoutType" />
         </LayoutHeader>
         <LayoutContent>
             @Body
@@ -49,7 +49,7 @@ else if (layoutType == "sider-with-header-on-top")
                      ThemeGradientChanged="@OnThemeGradientChanged"
                      ThemeRoundedChanged="@OnThemeRoundedChanged"
                      ThemeColorChanged="@OnThemeColorChanged"
-                     @bind-LayoutType="@layoutType" />
+                     @LayoutType="@layoutType" />
         </LayoutHeader>
         <Layout Sider>
             <LayoutSider>
