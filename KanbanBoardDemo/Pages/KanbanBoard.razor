@@ -3,23 +3,48 @@
 
 <Paragraph>Number of Tasks: @currentTasks</Paragraph>
 
-<DropContainer TItem="TodoItem" Items="@items" ItemsFilter="@((item, dropZone) => item.Group == dropZone)" ItemDropped="@ItemDropped" Flex="Flex.Wrap.Grow.Is1">
+<DropContainer TItem="DropItem" Items="@items" ItemsFilter="@((item, dropZone) => item.Group == dropZone)" ItemDropped="@itemsDropped" Flex="Flex.Wrap.Grow.Is1">
     <ChildContent>
-
+        <DropZone TItem="DropItem" Name="To-Do" Border="Boarder.Rounded" Background="Background.Light" Padding="Padding.Is3" Margin="Margin.Is3" Flex="Flex.Grow.Is1">
+            <Heading Size="HeadingSize.Is4" Margin="Margin.Is3.FromBottom">To Do</Heading>
+        </DropZone>
+        <DropZone TItem="DropItem" Name="Ongoing" Border="Boarder.Rounded" Background="Background.Light" Padding="Padding.Is3" Margin="Margin.Is3" Flex="Flex.Grow.Is1">
+            <Heading Size="HeadingSize.Is4" Margin="Margin.Is3.FromBottom">Ongoing</Heading>
+        </DropZone>
+        <DropZone TItem="DropItem" Name="Completed" Border="Boarder.Rounded" Background="Background.Light" Padding="Padding.Is3" Margin="Margin.Is3" Flex="Flex.Grow.Is1">
+            <Heading Size="HeadingSize.Is4" Margin="Margin.Is3.FromBottom">Completed</Heading>
+        </DropZone>
     </ChildContent>
+    <ItemTemplate>
+        <Card Shadow="Shadow.Default" Margin="Margin.Is3.OnY">
+            <CardBody>
+                @context.Name
+            </CardBody>
+        </Card>
+    </ItemTemplate>
 </DropContainer>
-@code {
-    int currentTasks;
 
-    public class TodoItem
+@code {
+    public class DropItem
     {
+        public string Name { get; init; }
         public string Group { get; set; }
     }
 
-    List<TodoItem> items;
+    private List<DropItem> items = new()
+{
+        new DropItem() {Name = "Contact Form", Group = "To-Do"},
+        new DropItem() {Name = "Profile Image", Group = "Ongoing"},
+        new DropItem() {Name = "Login Form", Group = "Completed"},
+        new DropItem() {Name = "Password Reset", Group = "Ongoing"},
+    };
 
-    private void ItemDropped( DraggableDroppedEventArgs<TodoItem> dropItem )
+    private void ItemDropped(DraggableDroppedEventArgs<DropItem> dropItem)
     {
         dropItem.Item.Group = dropItem.DropZoneName;
     }
+
+
+
 }
+
