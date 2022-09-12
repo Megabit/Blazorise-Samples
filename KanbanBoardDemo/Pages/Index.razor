@@ -41,5 +41,12 @@ Welcome to your Kanban Board.
         new DropItem() {Name = "Login Form", Group = "Completed"},
         new DropItem() {Name = "Password Reset", Group = "Ongoing"},
     };
+
+    private void ItemDropped(DraggableDroppedEventArgs<DropItem> dropItem)
+    {
+        dropItem.Item.Group = dropItem.DropZoneName;
+    }
+
+
 }
 
