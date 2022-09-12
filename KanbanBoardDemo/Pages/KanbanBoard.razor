@@ -3,8 +3,23 @@
 
 <Paragraph>Number of Tasks: @currentTasks</Paragraph>
 
-<DropContainer TItem="DropdownItem" Items="@items" ItemsFilter="@((item, dropZone) => item.Group == dropZone)" ItemDropped="@ItemDropped" Flex="Flex.Wrap.Grow.Is1">
+<DropContainer TItem="TodoItem" Items="@items" ItemsFilter="@((item, dropZone) => item.Group == dropZone)" ItemDropped="@ItemDropped" Flex="Flex.Wrap.Grow.Is1">
     <ChildContent>
 
     </ChildContent>
 </DropContainer>
+@code {
+    int currentTasks;
+
+    public class TodoItem
+    {
+        public string Group { get; set; }
+    }
+
+    List<TodoItem> items;
+
+    private void ItemDropped( DraggableDroppedEventArgs<TodoItem> dropItem )
+    {
+        dropItem.Item.Group = dropItem.DropZoneName;
+    }
+}
