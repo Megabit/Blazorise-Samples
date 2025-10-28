@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36603.0 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealTimeBlazorApp", "RealTimeBlazorApp\RealTimeBlazorApp.csproj", "{524597D5-6680-4F8F-B75F-BE7CD0AD5442}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{524597D5-6680-4F8F-B75F-BE7CD0AD5442}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{524597D5-6680-4F8F-B75F-BE7CD0AD5442}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{524597D5-6680-4F8F-B75F-BE7CD0AD5442}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{524597D5-6680-4F8F-B75F-BE7CD0AD5442}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CE1E15BE-6B34-49E0-8682-3241DC421EE4}
+	EndGlobalSection
+EndGlobal

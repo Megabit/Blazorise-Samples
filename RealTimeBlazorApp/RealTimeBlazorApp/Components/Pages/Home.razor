@@ -1,0 +1,23 @@
+﻿@page "/"
+@inject TaskUpdateService TaskUpdateService
+<PageTitle>Home</PageTitle>
+
+<Heading Size="HeadingSize.Is1">
+    Hello, world!
+</Heading>
+
+<Paragraph>
+    Welcome to your new SignalR app.
+</Paragraph>
+
+<Button Color="Color.Primary" Clicked="@OnNotifyClicked">
+    Notify Task Update
+</Button>
+
+<LiveNotifications />
+@code {
+    async Task OnNotifyClicked()
+    {
+        await TaskUpdateService.NotifyTaskUpdatedAsync( "UI Review", "Completed" );
+    }
+}

@@ -1,0 +1,71 @@
+﻿@using Microsoft.AspNetCore.SignalR.Client
+@inject IToastService ToastService
+@inject NavigationManager Navigation
+@implements IAsyncDisposable
+
+<Heading>Real-Time Notifications</Heading>
+
+@if ( messages.Count == 0 )
+{
+    <Paragraph>
+        No messages yet...
+    </Paragraph>
+}
+else
+{
+    <UnorderedList>
+        @foreach ( var msg in messages )
+        {
+            <UnorderedListItem>@msg</UnorderedListItem>
+        }
+    </UnorderedList>
+}
+
+@code {
+    private HubConnection? hubConnection;
+    private List<string> messages = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        hubConnection = new HubConnectionBuilder()
+            .WithUrl( Navigation.ToAbsoluteUri( "/notificationHub" ) )
+            .WithAutomaticReconnect()
+            .Build();
+
+        hubConnection.On<string, string>( "ReceiveMessage", async ( user, message ) =>
+        {
+            messages.Add( $"{user}: {message}" );
+            await ToastService.Info( $"New message from {user}", message );
+            await InvokeAsync( StateHasChanged );
+        } );
+
+        hubConnection.On<string, string>( "ReceiveChange", async ( title, content ) =>
+        {
+            await ToastService.Success( title, content );
+        } );
+
+        hubConnection.Closed += async error =>
+        {
+            await ToastService.Warning( "Disconnected", "Attempting to reconnect..." );
+            // SignalR auto-reconnect kicks in if configured; no manual start needed
+        };
+
+        hubConnection.Reconnecting += async error =>
+        {
+            await ToastService.Warning( "Connection lost", "Attempting to reconnect..." );
+        };
+
+        hubConnection.Reconnected += async connectionId =>
+        {
+            await ToastService.Success( "Reconnected", "Real-time updates restored" );
+        };
+
+        await hubConnection.StartAsync();
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if ( hubConnection is not null )
+            await hubConnection.DisposeAsync();
+    }
+}
